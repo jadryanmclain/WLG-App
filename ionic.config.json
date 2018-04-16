@@ -1,6 +1,6 @@
 {
-  "name": "WLGApp",
-  "app_id": "",
+  "name": "IonicShoppingList",
+  "app_id": "235f0bf4",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

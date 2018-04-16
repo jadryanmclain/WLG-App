@@ -1,44 +1,45 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component, Inject, ViewChild } from '@angular/core';
+import { Platform, NavController, NavParams } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { ToastService } from '../services/toast/toast.service';
+import { rootRenderNodes } from '@angular/core/src/view';
 
 @Component({
-  templateUrl: 'app.html'
+  //templateUrl: 'app.html'
+  template: '<ion-nav #myNav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = HomePage;
-
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
+    @ViewChild('myNav') nav: NavController
+     public rootPage: string = 'LoginPage';
+      
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private angularFireAuth: AngularFireAuth) {
+    platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
+      angularFireAuth.auth.onAuthStateChanged(function (user)
+      {
+        console.log("User status: " + user);
+        if (user) {
+          //TODO: Set root page to home if user is logged in
+          console.log("User Logged in: " + user.email);
+          this.rootPage = 'HomePage';
+          //this.nav.push('HomePage');
+        } else {
+          //TODO: send user to login page
+          console.log("Not logged in");
+          this.rootPage = 'LoginPage';
+          //this.nav.push('LoginPage');
+        }
+      });
     });
   }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+  ngOnInit() {
+    // Let's navigate from TabsPage to Page1
+    this.nav.push(this.rootPage);
+ }
 }
+
