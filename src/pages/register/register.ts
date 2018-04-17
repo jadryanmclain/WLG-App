@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastService } from '../../services/toast/toast.service';
 
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the RegisterPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,25 +12,31 @@ import { ToastService } from '../../services/toast/toast.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-register',
+  templateUrl: 'register.html',
 })
-export class LoginPage {
+export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, private toast: ToastService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad RegisterPage');
   }
 
-  login(username, password) {
-    this.angularFireAuth.auth.signInWithEmailAndPassword(username, password)
-      .then((user) => {
-        this.toast.show("user" + username + "logged in!");
-        this.navCtrl.setRoot('HomePage', {username});
-      });
+  register(email, username, password) {
+    this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      this.toast.show("user" + email + " added!");
+      this.navCtrl.setRoot('HomePage', {email});
+    });
+  }
+
+  cancelRegistration() {
+    this.navCtrl.setRoot('LoginPage');
   }
 
 
 }
+
+
