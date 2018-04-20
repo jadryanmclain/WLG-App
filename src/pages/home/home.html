@@ -1,8 +1,9 @@
 <ion-header>
   <ion-navbar color="secondary">
     <ion-title>
-      Mobile Lyrics and Chords
+      DOPE APP NAME HERE
     </ion-title>
+    <button class="logout" (click)="Logout()"><ion-icon name="log-out"></ion-icon></button>
   </ion-navbar>
 </ion-header>
 
@@ -10,42 +11,9 @@
 
   <ion-buttons>
     <!-- declarative way of navigating to a page on button press, uses the addchild lazy loading functionality -->
-    <button ion-button navPush="AddShoppingItemPage">Join Room</button>
+    <button ion-button navPush="JoinRoomPage">Join Room</button>
     <!-- declarative way of navigating to a page on button press, uses the addchild lazy loading functionality -->
-    <button ion-button navPush="RegisterBandPage">Create Room</button>
-  </ion-buttons>
-  <ion-list>
-    <ion-item>
-      <ion-label>Show Songs from Bands</ion-label>
-      <ion-select (ionChange)="onContextChange($event)" [(ngModel)]="bands" multiple="false" cancelText="cancel" okText="show songs from selected">
-        <ion-option *ngFor="let band of bandsList$ | async" detail-push>
-          {{band.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>
-      Songs:
-    </ion-list-header>
-    <ion-item *ngFor="let item of songsList$ | async" detail-push navPush="ViewSongPage" [navParams]="{item: item}">
-      {{item.title}}
-    </ion-item>
-  </ion-list>
-
-  <ion-buttons>
-    <!-- declarative way of navigating to a page on button press, uses the addchild lazy loading functionality -->
-    <button ion-button navPush="LoginPage">
-      Login
-    </button>
-
-    <button ion-button (click)="showAllSongs()">
-      All Songs
-    </button>
-
-    <button ion-button navPush="InvitePage">
-      Invite
-    </button>
-
+    <button ion-button navPush="CreateRoomPage">Create Room</button>
   </ion-buttons>
 
 </ion-content>

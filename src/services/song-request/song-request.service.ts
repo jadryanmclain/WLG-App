@@ -13,7 +13,7 @@ export class SongRequestService {
     constructor(private db: AngularFireDatabase) {
     }
 
-    getSongRequestList() {
+    getSongRequestList(roomCode: string) {
         return this.songRequestListRef;
     }
     addRequest(song: SongRequest) {
@@ -23,43 +23,16 @@ export class SongRequestService {
         return this.songRequestListRef.remove(song.key);
     }
 
+    createRoom(room: Room) {
+        return this.roomRef.push(room);
+    }
+    generateRoomCode() {
+        var code = "";
+        var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+        for (let i = 0; i < 5; i++)
+            code += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    
-    // filterByBand(band: Band){
-    //     return this.db.list('/song-list', ref => ref.orderByChild('band').equalTo(band.name));
-    // }
-    // filterByString(band: string) {
-    //     return this.db.list('/song-list', ref => ref.orderByChild('band').equalTo(band));
-    // }
-    // assembleFilteredList(ctxt): any {
-    //     //we need strings with band names to querry the database, so first we get those:
-    //     // console.log("Context change returning: " + JSON.stringify(ctxt));
-    //     // console.log("Context change returning: " + ctxt);
-    //     // var bandsFilter = JSON.stringify(ctxt);
-    //     //console.log("Split string:" + bandsFilter.split(/\s*,\s*/));
-    //     //bandsFilter = bandsFilter.replace(/(\r\n\t|\n|\r\t)/gm,"");
-    //     //console.log("Replace string:" + bandsFilter);
-    
-    //     //var emails = bandsFilter.replace("\n","").split("/\s*,\s*/");
-    //     var bandName = '';
-    //     //console.log("String returned: " + ctxt);
-
-    //     //for (var i = 0; i < ctxt.length; i++) {
-    //     //console.log("String returned: " + ctxt[i]);
-    //       bandName = ctxt;
-    //       bandName = bandName.substring(13);
-    //       bandName = bandName.trim();
-    //       bandName = bandName.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-    //     //}
-    //     //   for(var x = 0; x < ctxt[i].length; x++) {
-    //     //       console.log("i = " + x + " " + bandName[x]);
-    //     //   }
-    //     //  console.log("bandName: " + bandName);
-    //     return(this.filterByString(bandName));
-    // }
-
-    // editItem(item: Item) {
-    //     return this.songListRef.update(item.key, item);
-    // }
+        return code;
+    }
 }

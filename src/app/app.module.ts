@@ -9,17 +9,17 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { SongsService } from './../services/songs/songs.service';
-import { ToastService } from '../services/toast/toast.service';
-import { LoginPage } from '../pages/login/login';
-
 import { Camera } from '@ionic-native/camera';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { ToastService } from '../services/toast/toast.service';
+import { SongRequestService } from '../services/song-request/song-request.service';
 
+import { HomePage } from '../pages/home/home';
+import { CreateRoomPage } from '../pages/create-room/create-room';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,8 +40,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SongsService,
     ToastService,
+    SongRequestService,
     AngularFireAuth,
     EmailComposer,
     Camera,

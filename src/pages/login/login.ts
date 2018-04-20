@@ -27,7 +27,7 @@ export class LoginPage {
   login(username, password) {
     this.angularFireAuth.auth.signInWithEmailAndPassword(username, password)
       .then((user) => {
-        this.toast.show("user" + username + "logged in!");
+        this.toast.show("User " + username + " logged in!");
         this.navCtrl.setRoot('HomePage', {username});
       });
   }

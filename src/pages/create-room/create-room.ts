@@ -4,8 +4,9 @@ import { Room } from '../../models/room.model';
 import { SongRequest } from '../../models/song-request.model';
 import { SongRequestService } from '../../services/song-request/song-request.service';
 import { ToastService } from '../../services/toast/toast.service';
+
 /**
- * Generated class for the RegisterBandPage page.
+ * Generated class for the CreateRoomPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,27 +14,28 @@ import { ToastService } from '../../services/toast/toast.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-register-band',
-  templateUrl: 'register-band.html',
+  selector: 'page-create-room',
+  templateUrl: 'create-room.html',
 })
-export class RegisterBandPage {
-  band: Band = {
-  name: ''
+export class CreateRoomPage {
+  room: Room = {
+    name: '',
+    code: this.regRoom.generateRoomCode()
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  private regBand: SongsService, private toast: ToastService) {
+    private regRoom: SongRequestService, private toast: ToastService) {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterBandPage');
+    console.log('ionViewDidLoad CreateRoomPage');
   }
 
-  addBand(band: Band) {
-    this.regBand.addBand(band).then(ref => {
-      this.toast.show(`${band.name} registered!`);
-      this.navCtrl.setRoot('HomePage', {key: ref.key});
+  createNewRoom(): void {
+    this.regRoom.createRoom(this.room).then(ref => {
+      this.toast.show(`The room "${this.room.name}" has been created!`);
+      this.navCtrl.setRoot('HomePage', { key: ref.key });
     });
   }
-
 }
