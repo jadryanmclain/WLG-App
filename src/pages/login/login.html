@@ -19,15 +19,15 @@
     <ion-label>Email:</ion-label>
     <ion-input [(ngModel)]="email"></ion-input>
   </ion-item>
-  
+
   <ion-item>
     <ion-label>Password:</ion-label>
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
-  
+
   <div text-center>
     <button ion-button (click)="register(email, password)">Register</button>
     <button ion-button (click)="login(email, password)">Login</button>
   </div>
-  
+
 </ion-content>

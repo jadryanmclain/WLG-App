@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Band } from '../../models/band.model';
-import { Item } from '../../models/item.model';
-import { SongsService } from '../../services/songs/songs.service';
+import { Room } from '../../models/room.model';
+import { SongRequest } from '../../models/song-request.model';
+import { SongRequestService } from '../../services/song-request/song-request.service';
 import { ToastService } from '../../services/toast/toast.service';
 /**
  * Generated class for the RegisterBandPage page.

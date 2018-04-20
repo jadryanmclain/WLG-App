@@ -1,0 +1,26 @@
+<!--
+  Generated template for the AddSongRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Song Request</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Song Title: </ion-label>
+    <ion-input [(ngModel)]="song-request.title" placeholder="Title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Artist: </ion-label>
+    <ion-input [(ngModel)]="song-request.artist" placeholder="Artist"></ion-input>
+  </ion-item>
+  <button ion-button block clear (click)="addSongRequest(songRequest)"> Add</button>
+</ion-content>

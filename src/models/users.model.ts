@@ -1,6 +1,6 @@
 export interface User {
     key?: string;
-    band: string;
+    username: string;
     email: string;
     password: string;
 }

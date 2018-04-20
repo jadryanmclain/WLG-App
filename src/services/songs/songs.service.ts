@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Item } from '../../models/item.model';
-import { Band } from '../../models/band.model';
+import { SongRequest } from '../../models/song-request.model';
+import { Room } from '../../models/room.model';
 
 @Injectable() //don't leave this out! Need or you get dependencies error, not in video
 export class SongsService {

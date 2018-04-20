@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Item } from '../../models/item.model';
-import { SongsService } from '../../services/songs/songs.service';
+import { SongRequest } from '../../models/song-request.model';
+import { SongRequestService } from '../../services/song-request/song-request.service';
 import { ToastService } from '../../services/toast/toast.service';
 
 /**

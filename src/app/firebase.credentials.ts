@@ -1,8 +1,8 @@
 export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyD5pundZU50rZhuhPYliUpXvVBu4k7KBHM",
-    authDomain: "shoppinglist-e66a4.firebaseapp.com",
-    databaseURL: "https://shoppinglist-e66a4.firebaseio.com",
-    projectId: "shoppinglist-e66a4",
-    storageBucket: "shoppinglist-e66a4.appspot.com",
-    messagingSenderId: "96119430578"
-  };
+  apiKey: "AIzaSyBZrdY9V-_ND4FAZlxNdotaAhlnNYBfac0",
+  authDomain: "wlg-app.firebaseapp.com",
+  databaseURL: "https://wlg-app.firebaseio.com",
+  projectId: "wlg-app",
+  storageBucket: "wlg-app.appspot.com",
+  messagingSenderId: "998766951535"
+};
