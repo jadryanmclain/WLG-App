@@ -15,10 +15,10 @@
 
 
 <ion-content padding>
-    <ion-item>
-        <ion-label>Room Name: </ion-label>
-        <ion-input [(ngModel)]="room.name" placeholder="Name"></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label>Room Name: </ion-label>
+    <ion-input [(ngModel)]="room.name" placeholder="Name"></ion-input>
+  </ion-item>
 
-<button ion-button block clear (click)="createNewRoom(room)">Create Room</button>
+  <button ion-button block large (click)="createNewRoom(room)">Create Room</button>
 </ion-content>

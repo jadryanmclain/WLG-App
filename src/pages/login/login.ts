@@ -29,6 +29,9 @@ export class LoginPage {
       .then((user) => {
         this.toast.show("User " + username + " logged in!");
         this.navCtrl.setRoot('HomePage', {username});
+      })
+      .catch(error => {
+        this.toast.show(error);
       });
   }
 

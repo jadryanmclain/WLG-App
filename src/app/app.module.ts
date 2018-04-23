@@ -16,10 +16,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { ToastService } from '../services/toast/toast.service';
 import { SongRequestService } from '../services/song-request/song-request.service';
+import { DjRoomService } from '../services/dj-room/dj-room.service';
 
+import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { CreateRoomPage } from '../pages/create-room/create-room';
-import { LoginPage } from '../pages/login/login';
+import { DjRoomPage } from '../pages/dj-room/dj-room';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { LoginPage } from '../pages/login/login';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ToastService,
     SongRequestService,
+    DjRoomService,
     AngularFireAuth,
     EmailComposer,
     Camera,

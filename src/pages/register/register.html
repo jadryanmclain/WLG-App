@@ -30,9 +30,9 @@
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
   
-  <div text-center>
-    <button ion-button (click)="register(email, username, password)">Register</button>
-    <button ion-button (click)="cancelRegistration()">Cancel</button>
+  <div class="button-wrapper" text-center>
+    <button ion-button block large (click)="register(email, username, password)">Register</button>
+    <button ion-button block large clear (click)="cancelRegistration()">Cancel</button>
   </div>
   
 </ion-content>

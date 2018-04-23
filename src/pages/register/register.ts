@@ -29,11 +29,17 @@ export class RegisterPage {
     .then((res) => {
       this.toast.show("user" + email + " added!");
       this.navCtrl.setRoot('HomePage', {email});
+    })
+    .catch(error => {
+      this.toast.show(error);
     });
   }
 
   cancelRegistration() {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.pop()
+    .catch(error => {
+      this.navCtrl.setRoot("LoginPage");
+    });
   }
 
 

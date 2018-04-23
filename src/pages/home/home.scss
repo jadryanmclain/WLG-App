@@ -1,17 +1,26 @@
 page-home {
+    button.logout {
+        color: white;
+        background: transparent;
+        border: 0;
+        font-size: 28px;
+    }
+
+    .bar-buttons {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        button {
+            color: white;
+        }
+    }
+    
     ion-navbar {
         .toolbar-content {
             display: flex;
         }
-
-        button {
-            color: white;
-
-            &.logout {
-                background: transparent;
-                border: 0;
-                font-size: 28px;
-            }
-        }
+        
     }
 }

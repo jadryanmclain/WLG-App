@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Room } from '../../models/room.model';
 import { SongRequest } from '../../models/song-request.model';
 import { SongRequestService } from '../../services/song-request/song-request.service';
@@ -20,10 +21,11 @@ import { ToastService } from '../../services/toast/toast.service';
 export class CreateRoomPage {
   room: Room = {
     name: '',
-    code: this.regRoom.generateRoomCode()
+    code: this.regRoom.generateRoomCode(),
+    userid: this.angularFireAuth.auth.currentUser.uid
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public angularFireAuth: AngularFireAuth, public navParams: NavParams,
     private regRoom: SongRequestService, private toast: ToastService) {
 
   }
@@ -35,7 +37,8 @@ export class CreateRoomPage {
   createNewRoom(): void {
     this.regRoom.createRoom(this.room).then(ref => {
       this.toast.show(`The room "${this.room.name}" has been created!`);
-      this.navCtrl.setRoot('HomePage', { key: ref.key });
+      this.navCtrl.pop();
+      this.navCtrl.push('DjRoomPage', { room: ref.key });
     });
   }
 }

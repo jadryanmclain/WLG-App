@@ -7,11 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>LoginPage</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
 
@@ -25,9 +24,9 @@
     <ion-input type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
 
-  <div text-center>
-    <button ion-button navPush="RegisterPage">Register</button>
-    <button ion-button (click)="login(email, password)">Login</button>
+  <div class="button-wrapper" text-center>
+    <button ion-button block large (click)="login(email, password)">Login</button>
+    <button ion-button block large clear navPush="RegisterPage">Register</button>
   </div>
 
 </ion-content>
