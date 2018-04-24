@@ -20,7 +20,7 @@ export class DjRoomPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public djRoomService: DjRoomService) {}
 
   ionViewDidLoad() {
-    console.log("This is the room object plz", this.djRoomService.getRoomName(this.roomRef));
+    console.log(this.djRoomService.getRoomName(this.roomRef));
   }
 
 }
