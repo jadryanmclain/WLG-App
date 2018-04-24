@@ -17,22 +17,22 @@
 
   <ion-item>
     <ion-label>Email:</ion-label>
-    <ion-input type="email" [(ngModel)]="email"></ion-input>
+    <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Username:</ion-label>
-    <ion-input type="text" [(ngModel)]="username"></ion-input>
+    <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label>Password:</ion-label>
-    <ion-input type="password" [(ngModel)]="password"></ion-input>
+    <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
   </ion-item>
   
   <div class="button-wrapper" text-center>
     <button ion-button block large (click)="register(email, username, password)">Register</button>
     <button ion-button block large clear (click)="cancelRegistration()">Cancel</button>
-  </div>
+  </div> 
   
 </ion-content>

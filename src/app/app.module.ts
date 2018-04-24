@@ -17,6 +17,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ToastService } from '../services/toast/toast.service';
 import { SongRequestService } from '../services/song-request/song-request.service';
 import { DjRoomService } from '../services/dj-room/dj-room.service';
+import { UserService } from '../services/user/user.service';
 
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
@@ -45,6 +46,7 @@ import { DjRoomPage } from '../pages/dj-room/dj-room';
     ToastService,
     SongRequestService,
     DjRoomService,
+    UserService,
     AngularFireAuth,
     EmailComposer,
     Camera,

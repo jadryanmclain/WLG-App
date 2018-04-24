@@ -21,12 +21,12 @@ import { ToastService } from '../../services/toast/toast.service';
 export class CreateRoomPage {
   room: Room = {
     name: '',
-    code: this.regRoom.generateRoomCode(),
+    code: this.songRequestService.generateRoomCode(),
     userid: this.angularFireAuth.auth.currentUser.uid
   }
 
   constructor(public navCtrl: NavController, public angularFireAuth: AngularFireAuth, public navParams: NavParams,
-    private regRoom: SongRequestService, private toast: ToastService) {
+    private songRequestService: SongRequestService, private toast: ToastService) {
 
   }
 
@@ -35,7 +35,7 @@ export class CreateRoomPage {
   }
 
   createNewRoom(): void {
-    this.regRoom.createRoom(this.room).then(ref => {
+    this.songRequestService.createRoom(this.room).then(ref => {
       this.toast.show(`The room "${this.room.name}" has been created!`);
       this.navCtrl.pop();
       this.navCtrl.push('DjRoomPage', { room: ref.key });

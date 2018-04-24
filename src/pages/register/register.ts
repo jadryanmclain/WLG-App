@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastService } from '../../services/toast/toast.service';
+import { UserService } from '../../services/user/user.service';
+import { User } from '../../models/user.model';
 
 /**
  * Generated class for the RegisterPage page.
@@ -17,7 +19,12 @@ import { ToastService } from '../../services/toast/toast.service';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, private toast: ToastService) {
+  user: User = {
+    username: '',
+    userId: ''
+  }
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, private toast: ToastService, private userService: UserService) {
   }
 
   ionViewDidLoad() {
@@ -25,14 +32,25 @@ export class RegisterPage {
   }
 
   register(email, username, password) {
-    this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then((res) => {
-      this.toast.show("user" + email + " added!");
-      this.navCtrl.setRoot('HomePage', {email});
-    })
-    .catch(error => {
-      this.toast.show(error);
-    });
+    if (email == null) {
+      this.toast.show('All fields must be filled')
+    } else if (password ==  null) {
+      this.toast.show("All fields must be filled")
+    }else if (username == null) {
+      this.toast.show("All fields must be filled")
+    }else {
+      this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        this.user.userId = this.angularFireAuth.auth.currentUser.uid;
+        this.user.username = username;
+        this.userService.setUserName(this.user);
+        this.toast.show("User " + email + " added!");
+        this.navCtrl.setRoot('HomePage', {email});
+      })
+      .catch(error => {
+        this.toast.show(error);
+      });
+    }
   }
 
   cancelRegistration() {

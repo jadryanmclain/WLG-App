@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireDatabaseModule, DatabaseReference } from 'angularfire2/database';
 import { Room } from '../../models/room.model';
+import { DataSnapshot } from '@firebase/database';
 
 @Injectable() 
 export class DjRoomService {
-    private roomRef = this.db.list<Room>('room');
+    public roomRef: DatabaseReference = this.db.database.ref('/room');
+    public room = {};
 
-    constructor(private db: AngularFireDatabase) {}
+    constructor(private db: AngularFireDatabase, private dbModule: AngularFireDatabaseModule) {
 
-    getRoomName(roomId: string) {
-        let roomData = this.db.list<Room>('room', ref => ref.orderByChild("name").equalTo(roomId));
-        return roomData;
+       // this.rooms = db.database.ref('/room');
+        
+        
+
+    }
+
+    getRoomName(roomName: string) {
+        //this.rooms = this.db.list('room', 
+        //ref => ref.orderByChild('name'));
+        this.roomRef.on('value', DataSnapshot => {
+            this.room = DataSnapshot.val();
+        });
+
+        console.log('The right one' , this.room);
     }
 }
