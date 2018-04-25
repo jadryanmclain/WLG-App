@@ -7,7 +7,7 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Create a Room</ion-title>
   </ion-navbar>
 
@@ -19,6 +19,7 @@
     <ion-label>Room Name: </ion-label>
     <ion-input [(ngModel)]="room.name" placeholder="Name"></ion-input>
   </ion-item>
-
-  <button ion-button block large (click)="createNewRoom(room)">Create Room</button>
+  <div class="button-wrapper">
+    <button ion-button block large (click)="createNewRoom(room)">Create Room</button>
+  </div>
 </ion-content>

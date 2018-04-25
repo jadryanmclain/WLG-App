@@ -4,18 +4,36 @@ import { Room } from '../../models/room.model';
 
 @Injectable() 
 export class DjRoomService {
-    public roomRef: DatabaseReference = this.db.database.ref('/room');
-    public room = {};
+    roomRef: DatabaseReference = this.db.database.ref('/room');
 
     constructor(private db: AngularFireDatabase) {
     }
 
-    getRoomName(roomId: string) {
-        let roomList;
-        this.roomRef.on('value', function(snapshot) {
-            roomList = snapshot.val();
-            console.log(roomList);
+    getRoom(roomId: string): Promise<Room> {
+        return new Promise((resolve, reject) => {
+            let roomData;
+            this.roomRef.orderByKey().equalTo(roomId).on('value', function(snapshot) {
+                let room = snapshot.val();
+                let key;
+                for (key in room) {
+                    break;
+                }
+                resolve(room[key]);
+            });
         });
-        // return roomData;
+    }
+
+    getSongRequestsByRoom(roomId: string): Promise<Room> {
+        return new Promise((resolve, reject) => {
+            // TO-DO
+            let requestList;
+            resolve(requestList);
+        });
+    }
+
+    closeRoom(roomId: string): void {
+        this.db.database.ref('/room/' + roomId).update({
+            active: false
+        });
     }
 }

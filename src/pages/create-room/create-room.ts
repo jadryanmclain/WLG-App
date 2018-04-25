@@ -22,7 +22,8 @@ export class CreateRoomPage {
   room: Room = {
     name: '',
     code: this.songRequestService.generateRoomCode(),
-    userid: this.angularFireAuth.auth.currentUser.uid
+    userid: this.angularFireAuth.auth.currentUser.uid,
+    active: true
   }
 
   constructor(public navCtrl: NavController, public angularFireAuth: AngularFireAuth, public navParams: NavParams,
@@ -37,8 +38,7 @@ export class CreateRoomPage {
   createNewRoom(): void {
     this.songRequestService.createRoom(this.room).then(ref => {
       this.toast.show(`The room "${this.room.name}" has been created!`);
-      this.navCtrl.pop();
-      this.navCtrl.push('DjRoomPage', { room: ref.key });
+      this.navCtrl.setRoot("DjRoomPage", { room: ref.key });
     });
   }
 }

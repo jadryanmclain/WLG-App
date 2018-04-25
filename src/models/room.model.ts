@@ -3,4 +3,5 @@ export interface Room {
     name: string;
     code: string;
     userid: string;
+    active: boolean;
 }

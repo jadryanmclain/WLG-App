@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { DjRoomService } from '../../services/dj-room/dj-room.service';
+import { ToastService } from '../../services/toast/toast.service';
+import { Room } from '../../models/room.model';
 
 /**
  * Generated class for the DjRoomPage page.
@@ -16,11 +19,36 @@ import { DjRoomService } from '../../services/dj-room/dj-room.service';
 })
 export class DjRoomPage {
   roomRef: string = this.navParams.get('room');
+  roomName: string = '';
+  isActiveUserRoomCreator: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public djRoomService: DjRoomService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService) {}
 
   ionViewDidLoad() {
-    console.log(this.djRoomService.getRoomName(this.roomRef));
+    this.djRoomService.getRoom(this.roomRef).then(result => {
+      console.log("return from room: " , result);
+      this.roomName = result.name;
+
+
+      if (this.angularFireAuth.auth.currentUser.uid == result.userid) {
+        this.isActiveUserRoomCreator = true;
+        console.log("current user IS JESUS");
+      } else {
+        this.isActiveUserRoomCreator = false;
+        console.log("current user did not create room");
+      }
+    }).catch(error => {
+      this.toast.show(error);
+    });
   }
 
+  closeRoom(): void {
+    this.navCtrl.setRoot("HomePage");
+    this.toast.show("Room " + this.roomName + " has been closed.");
+    this.djRoomService.closeRoom(this.roomRef);
+  }
+  leaveRoom(): void {
+    this.navCtrl.setRoot("HomePage");
+    this.toast.show("You have left " + this.roomName + ".");
+  }
 }

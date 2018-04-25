@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{roomName}}</ion-title>
   </ion-navbar>
 
@@ -15,4 +15,8 @@
 
 <ion-content padding>
   
+  <div class="button-wrapper">
+    <button ion-button block large *ngIf="isActiveUserRoomCreator" (click)="closeRoom()">Close Room</button>
+    <button ion-button block large *ngIf="!isActiveUserRoomCreator" (click)="leaveRoom()">Leave Room</button>
+  </div>
 </ion-content>
