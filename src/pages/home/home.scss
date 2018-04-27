@@ -5,22 +5,41 @@ page-home {
         border: 0;
         font-size: 28px;
     }
-
-    .bar-buttons {
+    .home-wrapper {
         display: flex;
+        flex-direction: column;
         height: 100%;
         flex-direction: column;
-        justify-content: flex-end;
 
-        button {
-            color: white;
+        .home-img {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 80%;
+            }
+        }
+        .bar-buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+    
+            button {
+                color: white;
+            }
         }
     }
+    
+    
     
     ion-navbar {
         .toolbar-content {
             display: flex;
         }
+
+    
         
     }
 }

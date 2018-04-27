@@ -22,7 +22,7 @@ export class CreateRoomPage {
   room: Room = {
     name: '',
     code: this.songRequestService.generateRoomCode(),
-    userid: this.angularFireAuth.auth.currentUser.uid,
+    userId: this.angularFireAuth.auth.currentUser.uid,
     active: true
   }
 

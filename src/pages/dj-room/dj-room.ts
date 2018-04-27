@@ -32,7 +32,7 @@ export class DjRoomPage {
       this.roomCode = result.code;
 
 
-      if (this.angularFireAuth.auth.currentUser.uid == result.userid) {
+      if (this.angularFireAuth.auth.currentUser.uid == result.userId) {
         this.isActiveUserRoomCreator = true;
         console.log("current user IS JESUS");
       } else {
