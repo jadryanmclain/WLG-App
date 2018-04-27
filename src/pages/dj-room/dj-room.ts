@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { DjRoomService } from '../../services/dj-room/dj-room.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { Room } from '../../models/room.model';
+import { SongRequest } from '../../models/song-request.model';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the DjRoomPage page.
@@ -22,6 +24,7 @@ export class DjRoomPage {
   roomName: string = '';
   roomCode: string = '';
   isActiveUserRoomCreator: boolean = false;
+  songRequestList$: Observable<SongRequest[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService) {}
 
@@ -55,5 +58,10 @@ export class DjRoomPage {
   }
   goToRequestPage(): void {
     this.navCtrl.push("AddSongRequestPage", { code: this.roomCode , user: this.angularFireAuth.auth.currentUser.uid});
+  }
+
+  getSongRequestsByRoom(): void {
+    let list = this.djRoomService.getSongRequestsByRoom(this.roomCode);
+    console.log('We are doing a thing', list);
   }
 }

@@ -15,12 +15,15 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Song Title: </ion-label>
-    <ion-input [(ngModel)]="song.title" placeholder="Title"></ion-input>
+    <ion-input [(ngModel)]="song.title" placeholder="Title" aria-required></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Artist: </ion-label>
-    <ion-input [(ngModel)]="song.artist" placeholder="Artist"></ion-input>
+    <ion-input [(ngModel)]="song.artist" placeholder="Artist" aria-required></ion-input>
   </ion-item>
-  <button ion-button block clear (click)="addSongRequest(song)"> Add</button>
+  <ion-buttons>
+    <button ion-button block large (click)="addSongRequest(song)">Add</button>
+    <button ion-button block large navPop>Cancel</button> 
+  </ion-buttons> 
 </ion-content>
