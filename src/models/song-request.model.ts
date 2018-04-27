@@ -3,4 +3,5 @@ export interface SongRequest {
     title: string;
     artist: string;
     roomCode: string;
+    userId: string;
 }

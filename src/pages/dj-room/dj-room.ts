@@ -20,6 +20,7 @@ import { Room } from '../../models/room.model';
 export class DjRoomPage {
   roomRef: string = this.navParams.get('room');
   roomName: string = '';
+  roomCode: string = '';
   isActiveUserRoomCreator: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService) {}
@@ -28,6 +29,7 @@ export class DjRoomPage {
     this.djRoomService.getRoom(this.roomRef).then(result => {
       console.log("return from room: " , result);
       this.roomName = result.name;
+      this.roomCode = result.code;
 
 
       if (this.angularFireAuth.auth.currentUser.uid == result.userid) {
@@ -50,5 +52,8 @@ export class DjRoomPage {
   leaveRoom(): void {
     this.navCtrl.setRoot("HomePage");
     this.toast.show("You have left " + this.roomName + ".");
+  }
+  goToRequestPage(): void {
+    this.navCtrl.push("AddSongRequestPage", { code: this.roomCode , user: this.angularFireAuth.auth.currentUser.uid});
   }
 }

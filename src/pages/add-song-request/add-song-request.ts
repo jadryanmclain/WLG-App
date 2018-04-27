@@ -17,10 +17,13 @@ import { ToastService } from '../../services/toast/toast.service';
   templateUrl: 'add-song-request.html',
 })
 export class AddSongRequestPage {
+  roomCode: string = this.navParams.get('code');
+  userId: string = this.navParams.get('user');
   song: SongRequest = {
     title: '',
     artist: '',
-    roomCode: ''
+    roomCode: this.roomCode,
+    userId: this.userId
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private songRequests: SongRequestService, private toast: ToastService) {
@@ -30,10 +33,10 @@ export class AddSongRequestPage {
     console.log('ionViewDidLoad AddSongRequestPage');
   }
 
-  addItem(song: SongRequest) {
+  addSongRequest(song: SongRequest) {
     this.songRequests.addRequest(song).then(ref => {
-      this.toast.show(`Request for ${song.title} added to queue!`);
-      this.navCtrl.setRoot('HomePage', {key: ref.key});
+      this.toast.show(`${song.title} added to queue!`);
+      this.navCtrl.pop();
     });
   }
 

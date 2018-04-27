@@ -16,6 +16,7 @@
 <ion-content padding>
   
   <div class="button-wrapper">
+    <button ion-button block large (click)="goToRequestPage()">Add Song Request</button>
     <button ion-button block large *ngIf="isActiveUserRoomCreator" (click)="closeRoom()">Close Room</button>
     <button ion-button block large *ngIf="!isActiveUserRoomCreator" (click)="leaveRoom()">Leave Room</button>
   </div>
