@@ -25,14 +25,14 @@ export class JoinRoomPage {
   }
 
   joinRoom(roomCode: string): void {
-    let room = this.djRoomService.getRoomByRoomCode(roomCode).then(ref => {
+    this.djRoomService.getRoomByRoomCode(roomCode).then(ref => {
       let key;
       for (key in ref) {
           break;
       }
       this.toast.show(`You have joined "${ref[key].name}"`);
       this.navCtrl.setRoot("DjRoomPage", { room: key });
-    }).catch(function(error) {
+    }).catch(error => {
       this.toast.show(error);
     });
   }
