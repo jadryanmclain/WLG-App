@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, List } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { DjRoomService } from '../../services/dj-room/dj-room.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { Room } from '../../models/room.model';
 import { SongRequest } from '../../models/song-request.model';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 
 /**
  * Generated class for the DjRoomPage page.
@@ -26,14 +27,13 @@ export class DjRoomPage {
   isActiveUserRoomCreator: boolean = false;
   songRequestList$: Observable<SongRequest[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService, private db: AngularFireDatabase) {}
 
   ionViewDidLoad() {
     this.djRoomService.getRoom(this.roomRef).then(result => {
       console.log("return from room: " , result);
       this.roomName = result.name;
       this.roomCode = result.code;
-
 
       if (this.angularFireAuth.auth.currentUser.uid == result.userId) {
         this.isActiveUserRoomCreator = true;
@@ -61,7 +61,9 @@ export class DjRoomPage {
   }
 
   getSongRequestsByRoom(): void {
-    let list = this.djRoomService.getSongRequestsByRoom(this.roomCode);
-    console.log('We are doing a thing', list);
+    // let list = this.djRoomService.getSongRequestsByRoom(this.roomCode);
+    // console.log('song reqeusts by room: ', list);
+    this.songRequestList$ = this.djRoomService.getSongRequestsByRoom(this.roomCode);
+    console.log("cur list", this.songRequestList$);
   }
 }

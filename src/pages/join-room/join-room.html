@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>join-room</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Join a Room</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,11 +16,12 @@
 <ion-content padding>
 
     <ion-item>
-        <ion-label>Room Code:</ion-label>
-        <ion-input [(ngModel)]="roomCode"></ion-input>
-      </ion-item>
-
+      <ion-label>Room Code:</ion-label>
+      <ion-input [(ngModel)]="roomCode"></ion-input>
+    </ion-item>
+    <div class="button-wrapper">
       <button ion-button block large (click)="joinRoom(roomCode)">Join</button>
-      <button ion-button block large navPop>Cancel</button> 
+      <button ion-button block large navPop>Cancel</button>
+    </div>
 
 </ion-content>
