@@ -24,8 +24,8 @@ export class DjRoomPage {
   roomRef: string = this.navParams.get('room');
   roomName: string = '';
   roomCode: string = '';
-  isActiveUserRoomCreator: boolean = false;
-  songRequestList$: Observable<SongRequest[]>;
+  isUserHost: boolean = false;
+  songRequestList: Observable<SongRequest[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService, private db: AngularFireDatabase) {}
 
@@ -36,15 +36,18 @@ export class DjRoomPage {
       this.roomCode = result.code;
 
       if (this.angularFireAuth.auth.currentUser.uid == result.userId) {
-        this.isActiveUserRoomCreator = true;
-        console.log("current user IS JESUS");
+        this.isUserHost = true;
+        console.log("current user is host");
       } else {
-        this.isActiveUserRoomCreator = false;
+        this.isUserHost = false;
         console.log("current user did not create room");
       }
+      
+       this.songRequestList = this.djRoomService.initRoomList(this.roomCode);
     }).catch(error => {
       this.toast.show(error);
     });
+
   }
 
   closeRoom(): void {
@@ -52,18 +55,13 @@ export class DjRoomPage {
     this.toast.show("Room " + this.roomName + " has been closed.");
     this.djRoomService.closeRoom(this.roomRef);
   }
+
   leaveRoom(): void {
     this.navCtrl.setRoot("HomePage");
     this.toast.show("You have left " + this.roomName + ".");
   }
+
   goToRequestPage(): void {
     this.navCtrl.push("AddSongRequestPage", { code: this.roomCode , user: this.angularFireAuth.auth.currentUser.uid});
-  }
-
-  getSongRequestsByRoom(): void {
-    // let list = this.djRoomService.getSongRequestsByRoom(this.roomCode);
-    // console.log('song reqeusts by room: ', list);
-    this.songRequestList$ = this.djRoomService.getSongRequestsByRoom(this.roomCode);
-    console.log("cur list", this.songRequestList$);
   }
 }

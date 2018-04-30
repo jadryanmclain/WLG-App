@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, DatabaseReference, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Room } from '../../models/room.model';
 import { SongRequest } from '../../models/song-request.model';
-import { Observable } from '@firebase/util';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable() 
 export class DjRoomService {
     roomRef = this.db.database.ref('room');
     songReq = this.db.list<SongRequest>('song-request');
     songRef = this.db.database.ref('song-request');
+    roomObservables: Observable<SongRequest>[] = [];
 
     constructor(private db: AngularFireDatabase) {
     }
 
     getRoom(roomId: string): Promise<Room> {
         return new Promise((resolve, reject) => {
-            let roomData;
             this.roomRef.orderByKey().equalTo(roomId).on('value', function(snapshot) {
                 let room = snapshot.val();
                 let key;
@@ -35,12 +35,12 @@ export class DjRoomService {
         });
     }
     
-    getSongRequestsByRoom(roomCode: string) {
-        var obj;
-        var songsInRoom = this.songRef.orderByChild('roomCode').equalTo(roomCode).on('child_added', function(snapshot) {
-            obj = snapshot.val();
-        });
-        return obj;
+    initRoomList(roomCode: string): Observable<SongRequest[]> {
+        if (!!this.roomObservables[roomCode]) return this.roomObservables[roomCode];
+        else {
+            this.roomObservables[roomCode] = this.db.list<SongRequest[]>('song-request', ref => ref.orderByChild('roomCode').equalTo(roomCode)).valueChanges();
+            return this.roomObservables[roomCode];
+        }
     }
 
     closeRoom(roomId: string): void {

@@ -20,16 +20,15 @@
   </ion-list-header>
 
   <ion-list>
-    <ion-item *ngFor ="let song of songRequestList$ | async">
+    <ion-item *ngFor ="let song of songRequestList | async">
       {{song.title}} by {{song.artist}}
     </ion-item>
   </ion-list>
 
   
   <div class="button-wrapper">
-    <button ion-button block large (click)="getSongRequestsByRoom(this.roomCode)">Check get songs</button>
     <button ion-button block large (click)="goToRequestPage()">Add Song Request</button>
-    <button ion-button block large *ngIf="isActiveUserRoomCreator" (click)="closeRoom()">Close Room</button>
-    <button ion-button block large *ngIf="!isActiveUserRoomCreator" (click)="leaveRoom()">Leave Room</button>
+    <button ion-button block large *ngIf="isUserHost" (click)="closeRoom()">Close Room</button>
+    <button ion-button block large *ngIf="!isUserHost" (click)="leaveRoom()">Leave Room</button>
   </div>
 </ion-content>

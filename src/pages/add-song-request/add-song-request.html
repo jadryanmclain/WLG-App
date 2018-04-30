@@ -22,8 +22,8 @@
     <ion-label>Artist: </ion-label>
     <ion-input [(ngModel)]="song.artist" placeholder="Artist" aria-required></ion-input>
   </ion-item>
-  <ion-buttons>
+  <div class="button-wrapper">
     <button ion-button block large (click)="addSongRequest(song)">Add</button>
     <button ion-button block large navPop>Cancel</button> 
-  </ion-buttons> 
+  </div> 
 </ion-content>
