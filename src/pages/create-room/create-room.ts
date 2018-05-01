@@ -36,9 +36,13 @@ export class CreateRoomPage {
   }
 
   createNewRoom(): void {
-    this.songRequestService.createRoom(this.room).then(ref => {
-      this.toast.show(`The room "${this.room.name}" has been created!`);
-      this.navCtrl.setRoot("DjRoomPage", { room: ref.key });
-    });
+    if (this.room.name != '') {
+      this.songRequestService.createRoom(this.room).then(ref => {
+        this.toast.show(`The room "${this.room.name}" has been created!`);
+        this.navCtrl.setRoot("DjRoomPage", { room: ref.key });
+      });
+    } else {
+      this.toast.show("Please enter a room name.");
+    }
   }
 }

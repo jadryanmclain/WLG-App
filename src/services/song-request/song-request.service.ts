@@ -16,11 +16,15 @@ export class SongRequestService {
     getSongRequestList(roomCode: string) {
         return this.songRequestListRef;
     }
+    
     addRequest(song: SongRequest) {
         return this.songRequestListRef.push(song);
     }
+
+    // TO-DO: does not work correctly
     removeRequest(song: SongRequest) {
-        return this.songRequestListRef.remove(song.key);
+        console.log('silly child, you cannot delete me');
+        // return this.songRequestListRef.remove(song.key);
     }
 
     createRoom(room: Room) {

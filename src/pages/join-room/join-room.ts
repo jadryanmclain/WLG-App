@@ -17,7 +17,7 @@ import { DjRoomService } from '../../services/dj-room/dj-room.service';
 })
 export class JoinRoomPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public djRoomService: DjRoomService,  private toast: ToastService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public djRoomService: DjRoomService, private toast: ToastService) {
   }
 
   ionViewDidLoad() {
@@ -25,15 +25,19 @@ export class JoinRoomPage {
   }
 
   joinRoom(roomCode: string): void {
-    this.djRoomService.getRoomByRoomCode(roomCode).then(ref => {
-      let key;
-      for (key in ref) {
+    if (roomCode != null) {
+      this.djRoomService.getRoomByRoomCode(roomCode).then(ref => {
+        let key;
+        for (key in ref) {
           break;
-      }
-      this.toast.show(`You have joined "${ref[key].name}"`);
-      this.navCtrl.setRoot("DjRoomPage", { room: key });
-    }).catch(error => {
-      this.toast.show(error);
-    });
+        }
+        this.toast.show(`You have joined "${ref[key].name}"`);
+        this.navCtrl.setRoot("DjRoomPage", { room: key });
+      }).catch(error => {
+        this.toast.show('Please enter a valid room code.');
+      });
+    } else {
+      this.toast.show('Please enter a room code.')
+    }
   }
 }

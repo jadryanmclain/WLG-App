@@ -1,12 +1,46 @@
 page-dj-room {
-
-    ion-label {
+    ion-title {
         text-align: center;
-        font-size: 1.5em;
-        font-weight: 700;
-        color:#6441A4;
+        margin-top: -15px;
     }
-    .button-wrapper {
-        padding-top: 30px;
+    .sub-header {
+        color: #fff;
+        text-align: center;
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .room-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        flex-direction: column;
+        
+        .list {
+            flex-grow: 1;
+            height: calc(100% - 150px);
+            overflow: scroll;
+            
+            .song-request {
+        
+                .request-prefix {
+                    font-size: 1.3rem;
+                    line-height: 24px;
+                    color: #a9a9a9;
+                }
+                .title {
+                    display: block;
+                }
+                .artist {
+                    display: block;
+                }
+            }
+        }
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
     }
 }

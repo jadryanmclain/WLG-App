@@ -8,27 +8,33 @@
 
   <ion-navbar color="primary">
     <ion-title>{{roomName}}</ion-title>
+    <span class="sub-header">Code: {{roomCode}}</span>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <div class="room-wrapper">
+    <ion-list>
+      <ion-item-sliding *ngFor="let song of songRequestList | async">
+        <ion-item class="song-request">
+          <div class="title">
+            <span class="request-prefix">Song: </span>{{song.title}}</div>
+          <div class="artist">
+            <span class="request-prefix">By: </span>{{song.artist}}</div>
+        </ion-item>
+        <ion-item-options side="right" *ngIf="isUserHost">
+          <button ion-button (click)="deleteRequest(song)">Delete</button>
+        </ion-item-options>
+      </ion-item-sliding>
 
-  <ion-list-header>
-    Song Request List
-  </ion-list-header>
+    </ion-list>
 
-  <ion-list>
-    <ion-item *ngFor ="let song of songRequestList | async">
-      {{song.title}} by {{song.artist}}
-    </ion-item>
-  </ion-list>
-
-  
-  <div class="button-wrapper">
-    <button ion-button block large (click)="goToRequestPage()">Add Song Request</button>
-    <button ion-button block large *ngIf="isUserHost" (click)="closeRoom()">Close Room</button>
-    <button ion-button block large *ngIf="!isUserHost" (click)="leaveRoom()">Leave Room</button>
+    <div class="button-wrapper">
+      <button ion-button block large (click)="goToRequestPage()">Add Song Request</button>
+      <button ion-button block large *ngIf="isUserHost" (click)="closeRoom()">Close Room</button>
+      <button ion-button block large *ngIf="!isUserHost" (click)="leaveRoom()">Leave Room</button>
+    </div>
   </div>
+
 </ion-content>

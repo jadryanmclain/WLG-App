@@ -13,6 +13,7 @@ import { Camera } from '@ionic-native/camera';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { ToastService } from '../services/toast/toast.service';
 import { SongRequestService } from '../services/song-request/song-request.service';
@@ -34,6 +35,7 @@ import { DjRoomPage } from '../pages/dj-room/dj-room';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    TooltipsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

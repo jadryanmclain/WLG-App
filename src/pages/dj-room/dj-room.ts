@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, List } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { DjRoomService } from '../../services/dj-room/dj-room.service';
+import { SongRequestService } from '../../services/song-request/song-request.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { Room } from '../../models/room.model';
 import { SongRequest } from '../../models/song-request.model';
@@ -27,7 +28,7 @@ export class DjRoomPage {
   isUserHost: boolean = false;
   songRequestList: Observable<SongRequest[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService, private db: AngularFireDatabase) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth, public djRoomService: DjRoomService, private toast: ToastService, private db: AngularFireDatabase, public songReqService: SongRequestService) {}
 
   ionViewDidLoad() {
     this.djRoomService.getRoom(this.roomRef).then(result => {
@@ -44,6 +45,7 @@ export class DjRoomPage {
       }
       
        this.songRequestList = this.djRoomService.initRoomList(this.roomCode);
+       console.log(this.songRequestList);
     }).catch(error => {
       this.toast.show(error);
     });
@@ -54,6 +56,11 @@ export class DjRoomPage {
     this.navCtrl.setRoot("HomePage");
     this.toast.show("Room " + this.roomName + " has been closed.");
     this.djRoomService.closeRoom(this.roomRef);
+  }
+
+  deleteRequest(song: SongRequest): void {
+    console.log(song);
+    this.songReqService.removeRequest(song);
   }
 
   leaveRoom(): void {

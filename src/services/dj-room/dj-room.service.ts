@@ -39,6 +39,7 @@ export class DjRoomService {
         if (!!this.roomObservables[roomCode]) return this.roomObservables[roomCode];
         else {
             this.roomObservables[roomCode] = this.db.list<SongRequest[]>('song-request', ref => ref.orderByChild('roomCode').equalTo(roomCode)).valueChanges();
+            console.log(this.roomObservables[roomCode]);
             return this.roomObservables[roomCode];
         }
     }
